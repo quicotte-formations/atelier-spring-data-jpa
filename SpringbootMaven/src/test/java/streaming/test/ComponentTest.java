@@ -5,38 +5,42 @@
  */
 package streaming.test;
 
-import junit.framework.Assert;
-import org.junit.Before;
-import streaming.spring.SpringConfig;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import streaming.component.A;
+import streaming.spring.SpringConfig;
 
 /**
  *
- * @author ETY
+ * @author formation
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes=SpringConfig.class)
-public class SpringTest {
+public class ComponentTest {
     
-//    @Autowired
-//    private ClientService service;
+    @Autowired
+    private A monA;
     
-    @Before
-    public void avant(){
-        // Supprimer ts records
+    @Test
+    public void verifCNotNull(){
         
-        //Ajoute A,B,C
+        Assert.assertNotNull( monA.getB().getC() );
     }
     
     @Test
-    public void doNadaOK(){
+    public void verifBNotNull(){
         
+        Assert.assertNotNull( monA.getB() );
     }
+    
+//    @Test
+//    public void verifANotNull(){
+//        
+//        Assert.assertNotNull(monA);
+//    }
     
 }

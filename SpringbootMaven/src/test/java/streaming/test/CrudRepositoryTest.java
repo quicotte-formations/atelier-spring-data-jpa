@@ -6,37 +6,46 @@
 package streaming.test;
 
 import junit.framework.Assert;
-import org.junit.Before;
-import streaming.spring.SpringConfig;
 import org.junit.Test;
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import streaming.dao.ClientDaoCrud;
+import streaming.entity.Client;
+import streaming.spring.SpringConfig;
 
 /**
  *
- * @author ETY
+ * @author formation
  */
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes=SpringConfig.class)
-public class SpringTest {
+public class CrudRepositoryTest {
     
-//    @Autowired
-//    private ClientService service;
+    @Autowired
+    private ClientDaoCrud dao;
     
     @Before
     public void avant(){
-        // Supprimer ts records
         
-        //Ajoute A,B,C
+        // Vide la base
+        dao.deleteAll();
+        
+        // Ajoute clients
+        Client cli1 = new Client();
+        cli1.setPrenom("El Nahyane");
+        dao.save(cli1);
+        
+        Client cli2 = new Client();
+        cli2.setPrenom("Samba");
+        dao.save(cli2);
     }
     
     @Test
-    public void doNadaOK(){
+    public void verif2UtilsEnDB(){
         
+        Assert.assertEquals(2, dao.count());
     }
-    
 }
