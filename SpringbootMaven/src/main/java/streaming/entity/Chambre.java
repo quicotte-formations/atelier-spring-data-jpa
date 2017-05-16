@@ -6,80 +6,42 @@
 package streaming.entity;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author formation
  */
 @Entity
-public class Hotel implements Serializable {
+public class Chambre implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    @OneToMany(mappedBy = "hotel")
-    private Set<Chambre> chambres = new HashSet<>();
 
     private String nom;
     
-    private Long num;
+    private Long numero;
     
-    private String localite;
+    private Double prix;
     
-    private Long codePostal;
+    @ManyToOne
+    @JoinColumn
+    private Hotel hotel;
     
-    private String rue;
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public Long getNum() {
-        return num;
-    }
-
-    public void setNum(Long num) {
-        this.num = num;
-    }
-
-    public String getLocalite() {
-        return localite;
-    }
-
-    public void setLocalite(String localite) {
-        this.localite = localite;
-    }
-
-    public Long getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(Long codePostal) {
-        this.codePostal = codePostal;
-    }
-
-    public String getRue() {
-        return rue;
-    }
-
-    public void setRue(String rue) {
-        this.rue = rue;
-    }
-    
-    
+    @ManyToMany
+    @JoinTable
+    private List<Reservation> reservations=new ArrayList<>();
     
     public Long getId() {
         return id;
@@ -99,10 +61,10 @@ public class Hotel implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Hotel)) {
+        if (!(object instanceof Chambre)) {
             return false;
         }
-        Hotel other = (Hotel) object;
+        Chambre other = (Chambre) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -111,7 +73,7 @@ public class Hotel implements Serializable {
 
     @Override
     public String toString() {
-        return "atelierswing.entity.Hotel[ id=" + id + " ]";
+        return "streaming.entity.Chambre[ id=" + id + " ]";
     }
     
 }

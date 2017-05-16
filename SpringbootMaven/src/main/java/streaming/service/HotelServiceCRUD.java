@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package streaming.dao;
+package streaming.service;
 
-import java.io.Serializable;
 import org.springframework.data.repository.CrudRepository;
-import streaming.entity.Client;
+import streaming.entity.Hotel;
 
 /**
  *
  * @author formation
  */
-public interface ClientDaoCrud extends CrudRepository<Client, Long>{
+public interface HotelServiceCRUD extends CrudRepository<Hotel, Long>{
     
+    public Hotel findOneByNom(String n);
+            
 }
