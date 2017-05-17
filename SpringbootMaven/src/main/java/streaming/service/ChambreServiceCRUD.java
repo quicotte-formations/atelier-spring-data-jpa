@@ -16,5 +16,5 @@ import streaming.entity.Chambre;
 public interface ChambreServiceCRUD extends CrudRepository<Chambre, Long>{
     
  
-    public List<Chambre> findAllByReservationsClientNomAndReservationsClientPrenoma(String n, String x);
+    public List<Chambre> findAllByReservationsClientNomAndReservationsClientPrenom(String n, String x);
 }

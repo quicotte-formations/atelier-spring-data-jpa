@@ -5,7 +5,8 @@
  */
 package streaming.service;
 
-import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import streaming.entity.Client;
 
@@ -14,6 +15,10 @@ import streaming.entity.Client;
  * @author formation
  */
 public interface ClientServiceCrud extends CrudRepository<Client, Long>{
+    
+    public List<Client> findAllByReservationsChambresHotelNomAndReservationsDateDebutGreaterThanAndReservationsDateFinLessThan(String nomHotel, Date dateAfter, Date dateBefore);
+    public List<Client> findAllByReservationsChambresHotelNomAndReservationsDateDebutBetween(String nomHotel, Date dateAfter, Date dateBefore);
+    public List<Client> findAllByReservationsChambresHotelNomAndReservationsDateDebutAfterAndReservationsDateFinBefore(String nomHotel, Date dateAfter, Date dateBefore);
     
     public Client findOneByReservationsId(Long id);
 }
