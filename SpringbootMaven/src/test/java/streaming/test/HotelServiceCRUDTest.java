@@ -7,6 +7,10 @@ package streaming.test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceUnit;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +18,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import streaming.dao.ClientDAO;
+import streaming.entity.Client;
 import streaming.entity.Hotel;
+import streaming.service.ClientServiceCrud;
 import streaming.service.HotelServiceCRUD;
 import streaming.spring.SpringConfig;
 
@@ -26,9 +34,16 @@ import streaming.spring.SpringConfig;
 @SpringApplicationConfiguration(classes=SpringConfig.class)
 public class HotelServiceCRUDTest {
     
+	@Autowired
+	private ClientServiceCrud clientServiceCrud;
+	
     @Test
     public void testVide(){
-        
+    	
+    	Client client = new Client();
+    	client.setNom("Digna");
+    	client.setPrenom("Thomas");
+    	clientServiceCrud.save(client);
     }
     
 //    @Autowired
